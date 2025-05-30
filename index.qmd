@@ -7,31 +7,43 @@ webr:
   packages:
     - ggplot2
     - patchwork
+    - broom
 ---
 
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
 ```{webr}
 library(ggplot2)
+theme_set(theme_bw())
 library(patchwork)
+library(broom)
+
 data(trees)
 trees$Diam <- trees$Girth / 12
 trees$Girth <- NULL
 names(trees)
+```
 
+```{webr}
 gg_height <- ggplot(data = trees, aes(x = Height, y = Volume)) +
-  geom_point() +
-  geom_smooth(method = "lm", formula = y ~ poly(x, 2))
+    geom_point() +
+    geom_smooth(method = "lm", formula = y ~ poly(x, 2))
 
-gg_girth <- ggplot(data = trees, aes(x = Girth, y = Volume)) +
-  geom_point() +
-  geom_smooth(method = "lm", formula = y ~ poly(x, 2))
+gg_diam <- ggplot(data = trees, aes(x = Diam, y = Volume)) +
+    geom_point() +
+    geom_smooth(method = "lm", formula = y ~ poly(x, 2))
+
+gg_height + gg_diam
 ```
 
 
+Change to code below to fit your own model!
 
 ```{webr}
 tree_lm <- lm(Volume ~ Diam + Height, data = trees)
+
+tidy(tree_lm)
+
 par(mfrow = c(2, 2))
 plot(tree_lm)
 ```
