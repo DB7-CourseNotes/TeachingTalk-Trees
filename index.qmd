@@ -13,11 +13,17 @@ trees$Diam <- trees$Girth / 12
 trees$Girth <- NULL
 head(trees)
 
-par(mfrow = c(2,3))
-summary(lm(Volume ~ Diam + Height, data = trees))
+par(mfrow = c(1,2))
 plot(Volume ~ Diam, data = trees,
     main = "Volume versus Diameter")
 plot(Volume ~ Height, data = trees,
     main = "Volume versus Height")
-plot(lm(Volume ~ Diam + Height, data = trees))
+```
+
+
+
+```{webr}
+tree_lm <- lm(Volume ~ Diam + Height, data = trees)
+par(mfrow = c(2, 2))
+plot(tree_lm)
 ```
