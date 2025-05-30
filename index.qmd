@@ -1,0 +1,23 @@
+---
+title: "Feature Engineering"
+author: "Devan Becker"
+format: live-html
+engine: knitr
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{webr}
+data(trees)
+trees$Diam <- trees$Girth / 12
+trees$Girth <- NULL
+head(trees)
+
+par(mfrow = c(2,3))
+summary(lm(Volume ~ Diam + Height, data = trees))
+plot(Volume ~ Diam, data = trees,
+    main = "Volume versus Diameter")
+plot(Volume ~ Height, data = trees,
+    main = "Volume versus Height")
+plot(lm(Volume ~ Diam + Height, data = trees))
+```
