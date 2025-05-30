@@ -31,11 +31,13 @@ trees
 ## Basic Exploratory Plots
 
 ```{webr}
-gg_height <- ggplot(data = trees, aes(x = Height, y = Volume)) +
+gg_height <- ggplot(data = trees) +
+    aes(x = Height, y = Volume) +
     geom_point() +
     geom_smooth(method = "lm", formula = y ~ poly(x, 2))
 
-gg_diam <- ggplot(data = trees, aes(x = Diam, y = Volume)) +
+gg_diam <- ggplot(data = trees) +
+    aes(x = Diam, y = Volume) +
     geom_point() +
     geom_smooth(method = "lm", formula = y ~ poly(x, 2))
 
