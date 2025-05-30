@@ -9,10 +9,12 @@ webr:
     - patchwork
     - broom
     - dplyr
-  render-df: gt-interactive
+  render-df: paged-table
 ---
 
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Load the Data
 
 ```{webr}
 library(ggplot2)
@@ -23,8 +25,10 @@ library(broom)
 data(trees)
 trees$Diam <- trees$Girth / 12
 trees$Girth <- NULL
-head(trees)
+trees
 ```
+
+## Basic Exploratory Plots
 
 ```{webr}
 gg_height <- ggplot(data = trees, aes(x = Height, y = Volume)) +
@@ -38,15 +42,20 @@ gg_diam <- ggplot(data = trees, aes(x = Diam, y = Volume)) +
 gg_height + gg_diam
 ```
 
+## Model Fitting!
 
 Change to code below to fit your own model!
 
+It's best to save your model as a new object and then add it into the `bind_rows` call with an informative name.
+
 ```{webr}
 base_lm <- lm(Volume ~ Diam + Height, data = trees)
-poly_2 = lm(Volume ~ poly(Diam, 2) + poly(Height, 2), data = trees)
+poly_2 <- lm(Volume ~ poly(Diam, 2) + poly(Height, 2), data = trees)
 
+print("Coefficient table, with significance:")
 tidy(base_lm)
 
+print("Summary statistics from each model:")
 bind_rows(
     base = glance(base_lm),
     poly_2 = glance(poly_2),
