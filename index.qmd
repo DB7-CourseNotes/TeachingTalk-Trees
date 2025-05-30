@@ -8,6 +8,8 @@ webr:
     - ggplot2
     - patchwork
     - broom
+    - dplyr
+  render-df: gt-interactive
 ---
 
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
@@ -21,7 +23,7 @@ library(broom)
 data(trees)
 trees$Diam <- trees$Girth / 12
 trees$Girth <- NULL
-names(trees)
+head(trees)
 ```
 
 ```{webr}
@@ -40,10 +42,17 @@ gg_height + gg_diam
 Change to code below to fit your own model!
 
 ```{webr}
-tree_lm <- lm(Volume ~ Diam + Height, data = trees)
+base_lm <- lm(Volume ~ Diam + Height, data = trees)
+poly_2 = lm(Volume ~ poly(Diam, 2) + poly(Height, 2), data = trees)
 
-tidy(tree_lm)
+tidy(base_lm)
+
+bind_rows(
+    base = glance(base_lm),
+    poly_2 = glance(poly_2),
+    .id = "model"
+)
 
 par(mfrow = c(2, 2))
-plot(tree_lm)
+plot(base_lm)
 ```
