@@ -1,14 +1,14 @@
 ---
-title: "Feature Engineering"
+title: "Multiple Regression"
 author: "Devan Becker"
 format: live-html
 engine: knitr
 webr:
   packages:
     - ggplot2
-    - patchwork
     - broom
     - dplyr
+    - palmerpenguins
   render-df: paged-table
 ---
 
@@ -16,54 +16,57 @@ webr:
 
 ## Load the Data
 
+As usual, load all packages at the start of your document so that everyone knows what packages they'll need to install.
+
+Technical note: R version 4.5 includes the `penguins` data as part of the default installation, but with different column names. So that we're all on the same page, we'll use the `palmerpenguins` package.
+
 ```{webr}
 library(ggplot2)
 theme_set(theme_bw())
-library(patchwork)
+#library(patchwork)
 library(broom)
+library(dplyr)
+library(palmerpenguins)
 
-data(trees)
-trees$Diam <- trees$Girth / 12
-trees$Girth <- NULL
-trees
+data(penguins)
+head(penguins)
 ```
 
 ## Basic Exploratory Plots
 
 ```{webr}
-gg_height <- ggplot(data = trees) +
-    aes(x = Height, y = Volume) +
+gg_flip <- ggplot(data = penguins) +
+    aes(x = flipper_length_mm, y = body_mass_g) +
     geom_point() +
-    geom_smooth(method = "lm", formula = y ~ poly(x, 2))
+    geom_smooth(method = "lm", formula = y ~ x, se = FALSE)
+gg_flip
 
-gg_diam <- ggplot(data = trees) +
-    aes(x = Diam, y = Volume) +
+gg_bill_length_mm <- ggplot(data = penguins) +
+    aes(x = bill_length_mm, y = body_mass_g) +
     geom_point() +
-    geom_smooth(method = "lm", formula = y ~ poly(x, 2))
-
-gg_height + gg_diam
+    geom_smooth(method = "lm", formula = y ~ x, se = FALSE)
+gg_bill_length_mm
 ```
 
 ## Model Fitting!
 
-Change to code below to fit your own model!
+Change to code below to fit your own multiple linear regression model!
 
-It's best to save your model as a new object and then add it into the `bind_rows` call with an informative name.
+```{webr-r}
+lm_flip <- lm(body_mass_g ~ flipper_length_mm, data = penguins)
+lm_bill_length_mm <- lm(body_mass_g ~ bill_length_mm, data = penguins)
 
-```{webr}
-base_lm <- lm(Volume ~ Diam + Height, data = trees)
-poly_2 <- lm(Volume ~ poly(Diam, 2) + poly(Height, 2), data = trees)
-
-print("Coefficient table, with significance:")
-tidy(base_lm)
-
-print("Summary statistics from each model:")
 bind_rows(
-    base = glance(base_lm),
-    poly_2 = glance(poly_2),
+    flip = glance(lm_flip),
+    bill_len = glance(lm_bill_length_mm),
     .id = "model"
 )
 
-par(mfrow = c(2, 2))
-plot(base_lm)
+bind_rows(
+    flip = tidy(lm_flip),
+    bill_len = tidy(lm_bill_length_mm),
+    .id = "model"
+) |>
+    arrange(term, model)
+
 ```

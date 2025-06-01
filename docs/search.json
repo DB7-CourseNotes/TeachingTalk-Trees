@@ -1,16 +1,30 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Multiple Regression",
+    "section": "",
+    "text": "As usual, load all packages at the start of your document so that everyone knows what packages they’ll need to install.\nTechnical note: R version 4.5 includes the penguins data as part of the default installation, but with different column names. So that we’re all on the same page, we’ll use the palmerpenguins package."
+  },
+  {
+    "objectID": "index.html#load-the-data",
+    "href": "index.html#load-the-data",
+    "title": "Multiple Regression",
+    "section": "",
+    "text": "As usual, load all packages at the start of your document so that everyone knows what packages they’ll need to install.\nTechnical note: R version 4.5 includes the penguins data as part of the default installation, but with different column names. So that we’re all on the same page, we’ll use the palmerpenguins package."
+  },
+  {
     "objectID": "index.html#basic-exploratory-plots",
     "href": "index.html#basic-exploratory-plots",
-    "title": "Feature Engineering",
+    "title": "Multiple Regression",
     "section": "Basic Exploratory Plots",
     "text": "Basic Exploratory Plots"
   },
   {
     "objectID": "index.html#model-fitting",
     "href": "index.html#model-fitting",
-    "title": "Feature Engineering",
+    "title": "Multiple Regression",
     "section": "Model Fitting!",
-    "text": "Model Fitting!\nChange to code below to fit your own model!\nIt’s best to save your model as a new object and then add it into the bind_rows call with an informative name."
+    "text": "Model Fitting!\nChange to code below to fit your own multiple linear regression model!"
   }
 ]
