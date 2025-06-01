@@ -52,7 +52,7 @@ gg_bill_length_mm
 
 Change to code below to fit your own multiple linear regression model!
 
-```{webr-r}
+```{webr}
 lm_flip <- lm(body_mass_g ~ flipper_length_mm, data = penguins)
 lm_bill_length_mm <- lm(body_mass_g ~ bill_length_mm, data = penguins)
 
@@ -68,5 +68,16 @@ bind_rows(
     .id = "model"
 ) |>
     arrange(term, model)
+
+par(mfrow = c(2, 2))
+plot(lm_flip)
+```
+
+
+## Playground
+
+I'll use this code chunk in lecture. Feel free to use it for whatever you want!
+
+```{webr}
 
 ```
