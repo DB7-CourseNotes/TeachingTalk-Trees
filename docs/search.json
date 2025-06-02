@@ -25,7 +25,7 @@
     "href": "index.html#model-fitting",
     "title": "Multiple Regression",
     "section": "Model Fitting!",
-    "text": "Model Fitting!\nChange to code below to fit your own multiple linear regression model!"
+    "text": "Model Fitting!\nHere’s some code to fit a simple linear regression model to the data.\n\n\n\n\n\n\n\n\nChange to code below to fit your own multiple linear regression models!"
   },
   {
     "objectID": "index.html#playground",

@@ -35,22 +35,43 @@ head(penguins)
 ## Basic Exploratory Plots
 
 ```{webr}
-gg_flip <- ggplot(data = penguins) +
+gg1 <- ggplot(data = penguins) +
     aes(x = flipper_length_mm, y = body_mass_g) +
-    geom_point() +
-    geom_smooth(method = "lm", formula = y ~ x, se = FALSE)
+    geom_point(na.rm = TRUE) +
+    geom_smooth(
+        method = "lm", formula = y ~ x, se = FALSE,
+        na.rm = TRUE
+    )
 gg_flip
 
-gg_bill_length_mm <- ggplot(data = penguins) +
+gg2 <- ggplot(data = penguins) +
     aes(x = bill_length_mm, y = body_mass_g) +
-    geom_point() +
-    geom_smooth(method = "lm", formula = y ~ x, se = FALSE)
-gg_bill_length_mm
+    geom_point(na.rm = TRUE) +
+    geom_smooth(
+        method = "lm", formula = y ~ x, se = FALSE
+        na.rm = TRUE
+    )
+
+gg1
+gg2
 ```
 
 ## Model Fitting!
 
-Change to code below to fit your own multiple linear regression model!
+Here's some code to fit a simple linear regression model to the data.
+
+```{webr}
+lm_flip <- lm(body_mass_g ~ flipper_length_mm, data = penguins)
+
+cat("Summary statistics:\n")
+glance(lm_flip)
+
+cat("Coefficients:\n")
+tidy(lm_flip)
+
+```
+
+Change to code below to fit your own multiple linear regression models!
 
 ```{webr}
 lm_flip <- lm(body_mass_g ~ flipper_length_mm, data = penguins)
