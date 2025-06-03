@@ -65,6 +65,8 @@ Here's some code to fit a simple linear regression model to the data. Add some p
 
 Keep track of this with pen and paper (or, for an extra challenge, keep track in R).
 
+Make sure to check some plots - the one I included is not necessarily the one you want!
+
 ```{webr}
 lm_bill_dep <- lm(body_mass_g ~ bill_depth_mm, data = penguins)
 
@@ -74,6 +76,13 @@ glance(lm_bill_dep)
 cat("Coefficients:\n")
 tidy(lm_bill_dep)
 
+# The augment() function adds residuals and fitted values
+# to the original data frame
+aug_data <- augment(lm_bill_dep)
+ggplot(aug_data) +
+    aes(x = bill_depth_mm, y = .resid) +
+    geom_point() +
+    geom_hline(yintercept = 0, linetype = "dashed", colour = "red")
 ```
 
 

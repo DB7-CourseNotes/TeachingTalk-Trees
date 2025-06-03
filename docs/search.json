@@ -25,7 +25,7 @@
     "href": "index.html#model-fitting",
     "title": "Multiple Regression",
     "section": "Model Fitting!",
-    "text": "Model Fitting!\nHere’s some code to fit a simple linear regression model to the data. Add some predictors and see what happens!\n\nHow does the \\(R^2\\) value change as you add more predictors?\nWhat happens to the coefficient estimates?\nWhat happens to the significance of the coefficients?\n\nKeep track of this with pen and paper (or, for an extra challenge, keep track in R)."
+    "text": "Model Fitting!\nHere’s some code to fit a simple linear regression model to the data. Add some predictors and see what happens!\n\nHow does the \\(R^2\\) value change as you add more predictors?\nWhat happens to the coefficient estimates?\nWhat happens to the significance of the coefficients?\n\nKeep track of this with pen and paper (or, for an extra challenge, keep track in R).\nMake sure to check some plots - the one I included is not necessarily the one you want!"
   },
   {
     "objectID": "index.html#playground",
