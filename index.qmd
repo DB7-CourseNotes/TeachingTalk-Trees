@@ -42,7 +42,6 @@ gg1 <- ggplot(data = penguins) +
         method = "lm", formula = y ~ x, se = FALSE,
         na.rm = TRUE
     )
-gg_flip
 
 gg2 <- ggplot(data = penguins) +
     aes(x = bill_length_mm, y = body_mass_g) +
