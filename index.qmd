@@ -57,46 +57,29 @@ gg2
 
 ## Model Fitting!
 
-Here's some code to fit a simple linear regression model to the data.
+Here's some code to fit a simple linear regression model to the data. Add some predictors and see what happens!
+
+- How does the $R^2$ value change as you add more predictors?
+- What happens to the coefficient estimates?
+- What happens to the significance of the coefficients?
+
+Keep track of this with pen and paper (or, for an extra challenge, keep track in R).
 
 ```{webr}
-lm_flip <- lm(body_mass_g ~ flipper_length_mm, data = penguins)
+lm_bill_dep <- lm(body_mass_g ~ bill_depth_mm, data = penguins)
 
 cat("Summary statistics:\n")
-glance(lm_flip)
+glance(lm_bill_dep)
 
 cat("Coefficients:\n")
-tidy(lm_flip)
+tidy(lm_bill_dep)
 
-```
-
-Change to code below to fit your own multiple linear regression models!
-
-```{webr}
-lm_flip <- lm(body_mass_g ~ flipper_length_mm, data = penguins)
-lm_bill_length_mm <- lm(body_mass_g ~ bill_length_mm, data = penguins)
-
-bind_rows(
-    flip = glance(lm_flip),
-    bill_len = glance(lm_bill_length_mm),
-    .id = "model"
-)
-
-bind_rows(
-    flip = tidy(lm_flip),
-    bill_len = tidy(lm_bill_length_mm),
-    .id = "model"
-) |>
-    arrange(term, model)
-
-par(mfrow = c(2, 2))
-plot(lm_flip)
 ```
 
 
 ## Playground
 
-I'll use this code chunk in lecture. Feel free to use it for whatever you want!
+Time permitting, I'll use this code chunk in lecture. Feel free to use it for whatever you want!
 
 ```{webr}
 
